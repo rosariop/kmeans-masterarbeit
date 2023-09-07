@@ -1,3 +1,5 @@
+import string
+import time
 import numpy as np
 import json
 import matplotlib.pyplot as plt
@@ -56,7 +58,7 @@ for cluster_num in range(K):
         [company_data_scaled[i] for i, company in enumerate(data) if company['cluster'] == cluster_num])
 
     # Increase circle size for clusters 2 and 3
-    circle_size = cluster_radii[cluster_num] * (2 if cluster_num in [2, 3] else 1)
+    circle_size = cluster_radii[cluster_num]
 
     # Plot the data points
     plt.scatter(cluster_values[:, 0], cluster_values[:, 1], label=f'Cluster {cluster_num}', c=colors[cluster_num])
@@ -74,5 +76,6 @@ plt.xlabel('Weighted Customer Visits (Standardized)')
 plt.ylabel('Weighted Sales Volume (Standardized)')
 plt.title('Weighted K-Means Clustering of Companies with Variable Circle Sizes and Labels')
 plt.legend()
-plt.savefig('sales_clusters.png')
+timeMilli = int(time.time())
+plt.savefig('sales_clusters_'+str(timeMilli)+'.png')
 plt.show()
